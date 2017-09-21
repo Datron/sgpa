@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="og:description" content="Calculate SGPA and CGPA for VTU CBCS students">
+    <meta name="author" content="developed by Kartik Gajendra" />
+    <meta property="og:title" content="SGPA calculator for VTU CBCS scheme students"/>
+    <meta property="og:url" content="sgpa.datron.me"/>
+    <title>SGPA calculator</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Chela+One|Fira+Sans|Lato|Roboto|Ubuntu|Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- JQuery script -->
+
+    <!-- GreenSock JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+ <div class="container-fluid">
+     <h1 class="sgpa-title">SGPA Calculator</h1>
+     <form class="form-horizontal">
+         <div class="row">
+             <div class="col-md-5">
+                 <legend>Enter your marks</legend>
+                 <div class="form-group">
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 1</span>
+                         <input id="sub1" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 2</span>
+                         <input id="sub2" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 3</span>
+                         <input id="sub3" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 4</span>
+                         <input id="sub4" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 5</span>
+                         <input id="sub5" type="text    " class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Subject 6</span>
+                         <input id="sub6" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Lab 1</span>
+                         <input id="lab1" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                     <br>
+                     <div class="input-group">
+                         <span class="input-group-addon">Lab 2</span>
+                         <input id="lab2" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                     </div>
+                 </div>
+                 <button type="button" class="btn btn-success sgpaCalculate" id="startSGPA">Calculate</button>
+             </div>
+         </div>
+         <br>
+         <div class="col-md-3">
+             <div class="well SGPAresult">Result will appear here</div>
+         </div>
+     </form>
+     <br>
+ </div>
+ <div class="container-fluid">
+     <div class="row">
+         <h1 class="sgpa-title">CGPA calculator</h1>
+         <div class="col-md-5">
+             <legend>Enter your SGPAs according to semester</legend>
+             <p>provide zero for semesters not completed</p>
+             <form class="form-horizontal" id="CPGAarea">
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 1">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 2">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 3">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 4">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 5">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 6">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 7">
+                 </div>
+                 <div class="input-group">
+                     <input type="text" class="form-control cgpa" placeholder="semester 8">
+                 </div>
+             </form>
+         </div>
+     </div>
+     <br>
+     <button type="button" class="btn btn-success cgpaCalculate">Calculate CGPA</button>
+     <br>
+     <br>
+     <div class="col-md-4">
+         <div class="well cgparesult">Result will appear here</div>
+     </div>
+ </div>
+</body>
+</html>
