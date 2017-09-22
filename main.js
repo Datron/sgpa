@@ -43,7 +43,7 @@ function calcCGPA() {
     var i,sum=0,finalCGPA=0;
     var id = $('.cgpa');
     for(i=0;i<8;i++) {
-        var num = parseInt($(id[i]).val());
+        var num = parseFloat($(id[i]).val());
         if (isNaN(num))
             break;
         cgpa.push(num);
