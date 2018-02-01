@@ -9,3 +9,8 @@ body {
 form {
     padding: 10px;
 }
+#subModal {
+    top: 100px;
+    left: 30%;
+    width: 600px;
+}

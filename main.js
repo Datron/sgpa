@@ -1,22 +1,97 @@
-var credit = 4;
+const credit = 4;
+const optional_creds = 3;
+const lab_creds = 2;
+const hasOptional = false;
+var no_of_main = 1;
+var no_of_opt = 0;
+function addSubMain(){
+    no_of_main++;
+    let input_field = "<div class='input-group'>"+
+                         "<span class='input-group-addon'>Subject "+no_of_main+"</span>"+
+                         "<input id='sub"+no_of_main+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
+                     "</div><br>";
+    if (no_of_main > 6){
+        alert("cannot add more than 6 subjects");
+        return;
+    }
+    else if(no_of_opt == 2 && no_of_main > 4){
+        alert("cannot add more main subjects");
+        return;
+    }
+    $('#subject-field').append(input_field);
+    
+    
+}
+
+function addSubOptional(){
+    no_of_opt++;
+    let input_field = "<div class='input-group'>"+
+                         "<span class='input-group-addon'>Elective "+no_of_opt+"</span>"+
+                         "<input id='opt"+no_of_opt+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
+                     "</div><br>";
+    if(no_of_opt > 2){
+        alert("cannot add more than 2 electives");
+        return;
+    }
+    else if(no_of_main > 6){
+        alert("there are already 6 subjects");
+        return;
+    }
+    $('#subject-field').append(input_field);
+}
+
 function calcSGPA() {
     console.log("hello");
     var points = {};
     var i;
-    for(i=1;i<=6;i++){
-        var id='#sub'+i;
-        var item = parseInt($(id).val());
-        points[id] = getGrade(item);
+    if(no_of_opt > 0){
+        for(i=1;i<= no_of_main;i++){
+            var id='#sub'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
+        for(i=1;i<= no_of_opt;i++){
+            var id='#opt'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
+    }
+    else {
+        for(i=1;i<=no_of_main;i++){
+            var id='#sub'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
     }
     for(i=1;i<=2;i++) {
         var id1 = '#lab' + i;
         var item1 = parseInt($(id1).val());
         points[id1] = getGrade(item1);
     }
-    var totalSubPoints = 4*(points['#sub1']+points['#sub2']+points['#sub3']+points['#sub4']+points['#sub5']+points['#sub6'])+2*(points['#lab1']+points['#lab2']);
-    var SGPA = totalSubPoints/28;
+    var keys = Object.keys(points);
+    var totalSubPoints = 0;
+    var total_creds = 0;
+    for(i = 0; i < keys.length; i++){
+        if(keys[i].match(/sub/) != null){
+            console.log("subject")
+            totalSubPoints = totalSubPoints + credit * points[keys[i]];
+            total_creds = total_creds+ credit;
+        }
+        else if(keys[i].match(/opt/) != null){
+            console.log("elective")
+            totalSubPoints = totalSubPoints + optional_creds * points[keys[i]];
+            total_creds += optional_creds;
+        }
+        else if(keys[i].match(/lab/) != null){
+            console.log("lab")
+            totalSubPoints = totalSubPoints + lab_creds * points[keys[i]];
+            total_creds += lab_creds;
+        }
+    }
+    var SGPA = totalSubPoints/total_creds;
     $('.SGPAresult').html(SGPA);
-    console.log(totalSubPoints);
+    console.log("Total points"+totalSubPoints);
+    console.log("Total creds"+total_creds);
     console.log(points);
     // console.log(myLabs);
 }
@@ -38,6 +113,8 @@ function getGrade(item) {
     else if (item >=90)
         return 10;
 }
+
+//dont change this it works fine
 function calcCGPA() {
     var cgpa = new Array();
     var i,sum=0,finalCGPA=0;
@@ -57,4 +134,6 @@ function calcCGPA() {
 $(document).ready(function () {
     $('.sgpaCalculate').click(calcSGPA);
     $('.cgpaCalculate').click(calcCGPA);
+    $('#addSubject').click(addSubMain);
+    $('#addElective').click(addSubOptional);
 });
