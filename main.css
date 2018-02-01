@@ -11,6 +11,5 @@ form {
 }
 #subModal {
     top: 100px;
-    left: 30%;
-    width: 600px;
+    max-width: 600px;
 }
