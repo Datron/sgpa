@@ -116,19 +116,25 @@ function getGrade(item) {
 
 //dont change this it works fine
 function calcCGPA() {
+    var creds = [24,24,28,28,26,26,22,21]
     var cgpa = new Array();
-    var i,sum=0,finalCGPA=0;
+    var i,sum=0,finalCGPA=0,cred_sum=0,elements=8;
     var id = $('.cgpa');
     for(i=0;i<8;i++) {
         var num = parseFloat($(id[i]).val());
-        if (isNaN(num))
-            break;
+        if (isNaN(num)){
+            num = 0;
+            --elements;
+        }
         cgpa.push(num);
     }
-    for (i=0;i<cgpa.length;i++)
-        sum += cgpa[i];
+    for (i=0;i<elements;i++)
+        cred_sum += creds[i];
+    console.log("creds sum is"+cred_sum);
+    console.log(cgpa);
+    sum = 24*(cgpa[0]+cgpa[1])+28*(cgpa[2]+cgpa[3])+26*(cgpa[4]+cgpa[5])+22*cgpa[6]+21*cgpa[7];
     console.log(sum);
-    finalCGPA = sum / cgpa.length;
+    finalCGPA = sum / cred_sum;
     $('.cgparesult').html(finalCGPA);
 }
 $(document).ready(function () {
