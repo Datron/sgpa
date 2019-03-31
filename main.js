@@ -1,6 +1,7 @@
 const credit = 4;
 const optional_creds = 3;
 const lab_creds = 2;
+const final_year_project_creds = 5;
 const hasOptional = false;
 var no_of_main = 1;
 var no_of_opt = 0;

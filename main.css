@@ -1,6 +1,13 @@
 body {
+    font-family: 'Lato',sans-serif;
+}
+.main {
     padding: 10px;
     margin: 10px;
+}
+.about {
+    font-size: 30px;
+    text-align: justify;
     font-family: 'Lato',sans-serif;
 }
 .sgpa-title {
