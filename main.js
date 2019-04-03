@@ -2,26 +2,20 @@ const credit = 4;
 const optional_creds = 3;
 const lab_creds = 2;
 const final_year_project_creds = 5;
+const one_credits = 1;
 const hasOptional = false;
 var no_of_main = 1;
 var no_of_opt = 0;
+var no_of_project = 0;
+var no_of_twocreds = 0;
+var no_of_onecred = 0;
 function addSubMain(){
     no_of_main++;
     let input_field = "<div class='input-group'>"+
                          "<span class='input-group-addon'>Subject "+no_of_main+"</span>"+
                          "<input id='sub"+no_of_main+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
                      "</div><br>";
-    if (no_of_main > 6){
-        alert("cannot add more than 6 subjects");
-        return;
-    }
-    else if(no_of_opt == 2 && no_of_main > 4){
-        alert("cannot add more main subjects");
-        return;
-    }
     $('#subject-field').append(input_field);
-    
-    
 }
 
 function addSubOptional(){
@@ -30,36 +24,67 @@ function addSubOptional(){
                          "<span class='input-group-addon'>Elective "+no_of_opt+"</span>"+
                          "<input id='opt"+no_of_opt+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
                      "</div><br>";
-    if(no_of_opt > 2){
-        alert("cannot add more than 2 electives");
-        return;
-    }
-    else if(no_of_main > 6){
-        alert("there are already 6 subjects");
-        return;
-    }
     $('#subject-field').append(input_field);
 }
-
+function addProject(){
+    no_of_project++;
+    let input_field = "<div class='input-group'>"+
+                         "<span class='input-group-addon'>Final Year Project "+no_of_project+"</span>"+
+                         "<input id='project"+no_of_project+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
+                     "</div><br>";
+    $('#subject-field').append(input_field);
+}
+function addTwoCreds(){
+    no_of_twocreds++;
+    let input_field = "<div class='input-group'>"+
+                         "<span class='input-group-addon'>2 credit subject "+no_of_twocreds+"</span>"+
+                         "<input id='twocredits"+no_of_twocreds+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
+                     "</div><br>";
+    $('#subject-field').append(input_field);
+}
+function addOneCred(){
+    no_of_onecred++;
+    let input_field = "<div class='input-group'>"+
+                         "<span class='input-group-addon'>1 credit subject "+no_of_onecred+"</span>"+
+                         "<input id='onecredit"+no_of_onecred+"' type='text' class='form-control' name='sub1' placeholder='marks' required>"+
+                     "</div><br>";
+    $('#subject-field').append(input_field);
+}
 function calcSGPA() {
     console.log("hello");
     var points = {};
     var i;
     if(no_of_opt > 0){
-        for(i=1;i<= no_of_main;i++){
-            var id='#sub'+i;
-            var item = parseInt($(id).val());
-            points[id] = getGrade(item);
-        }
         for(i=1;i<= no_of_opt;i++){
             var id='#opt'+i;
             var item = parseInt($(id).val());
             points[id] = getGrade(item);
         }
     }
-    else {
+    if(no_of_main > 0) {
         for(i=1;i<=no_of_main;i++){
             var id='#sub'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
+    }
+    if(no_of_project > 0){
+        for(i=1;i<=no_of_project;i++){
+            var id='#project'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
+    }
+    if(no_of_twocreds > 0){
+        for(i=1;i<=no_of_twocreds;i++){
+            var id='#twocredits'+i;
+            var item = parseInt($(id).val());
+            points[id] = getGrade(item);
+        }
+    }
+    if(no_of_onecred > 0){
+        for(i=1;i<=no_of_onecred;i++){
+            var id='#onecredit'+i;
             var item = parseInt($(id).val());
             points[id] = getGrade(item);
         }
@@ -86,11 +111,27 @@ function calcSGPA() {
         else if(keys[i].match(/lab/) != null){
             console.log("lab")
             totalSubPoints = totalSubPoints + lab_creds * points[keys[i]];
+            if(points[keys[i]] !== 0)
+                total_creds += lab_creds;
+        }
+        else if(keys[i].match(/project/) != null){
+            console.log("project")
+            totalSubPoints = totalSubPoints + final_year_project_creds * points[keys[i]];
+            total_creds += final_year_project_creds;
+        }
+        else if(keys[i].match(/twocredits/) != null){
+            console.log("twocredits")
+            totalSubPoints = totalSubPoints + lab_creds * points[keys[i]];
             total_creds += lab_creds;
+        }
+        else if(keys[i].match(/onecredit/) != null){
+            console.log("onecredit")
+            totalSubPoints = totalSubPoints + one_credits * points[keys[i]];
+            total_creds += one_credits;
         }
     }
     var SGPA = totalSubPoints/total_creds;
-    $('.SGPAresult').html(SGPA);
+    $('.SGPAresult').html(SGPA.toFixed(2));
     console.log("Total points"+totalSubPoints);
     console.log("Total creds"+total_creds);
     console.log(points);
@@ -136,11 +177,15 @@ function calcCGPA() {
     sum = 24*(cgpa[0]+cgpa[1])+28*(cgpa[2]+cgpa[3])+26*(cgpa[4]+cgpa[5])+22*cgpa[6]+21*cgpa[7];
     console.log(sum);
     finalCGPA = sum / cred_sum;
-    $('.cgparesult').html(finalCGPA);
+    $('.cgparesult').html(finalCGPA.toFixed(2));
 }
 $(document).ready(function () {
     $('.sgpaCalculate').click(calcSGPA);
     $('.cgpaCalculate').click(calcCGPA);
     $('#addSubject').click(addSubMain);
     $('#addElective').click(addSubOptional);
+    $('#addTwoCredit').click(addTwoCreds);
+    $('#addProjectTwo').click(addProject);
+    $('#addOneCredit').click(addOneCred);
+
 });

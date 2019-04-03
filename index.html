@@ -70,6 +70,23 @@
      <p class="sgpa-title"> use this web app to calculate your SGPA and CGPA. Built for VTU students.  </p>
      <form class="form-horizontal">
          <div class="row">
+                <div class="col-md-6" style="text-align:center;">
+                        <h1 class="sgpa-title">Introduction</h1>
+                        <p class="intro">This SGPA calculator was built to help VTU students calculate their SGPA,iIt may be flexible enough to work with your
+                            university as well. To add subjects click the "+" button. The credit break up is as follows:
+                            <ul class="intro" style="text-align:initial">
+                                <li>Main - 4 credits</li>
+                                <li>Final Year Project - 5 credits</li>
+                                <li>Elective - 3 credits</li>
+                                <li>Labs,Internship seminars, technical seminars - 2 credits</li>
+                                <li>1 credit</li>
+                            </ul>
+                        </p>
+                        <p class="intro"> Use these settings to setup the calculator to the configuration of your current semester. As of 2019, this calculator is able
+                            to support semesters 1 to 8. The CGPA calculator is similar, just enter your cgpa from semester 1 to 8.
+                        </p>
+                    </div>
+                    <div class="col-md-1"></div>
              <div class="col-md-5">
                  <legend>Enter your marks</legend>
                  <div class="form-group" id="subject-field">
@@ -82,12 +99,12 @@
                  <div class="form-group" id="lab-fields">
                      <div class="input-group">
                          <span class="input-group-addon">Lab 1</span>
-                         <input id="lab1" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                         <input id="lab1" type="text" class="form-control" name="sub1" placeholder="marks. Put 0 if not required" required>
                      </div>
                      <br>
                      <div class="input-group">
                          <span class="input-group-addon">Lab 2</span>
-                         <input id="lab2" type="text" class="form-control" name="sub1" placeholder="marks" required>
+                         <input id="lab2" type="text" class="form-control" name="sub1" placeholder="marks. Put 0 if not required" required>
                     </div>
                      <br>
                  </div>
@@ -95,10 +112,13 @@
                  <button type="button" class="btn btn-success sgpaCalculate" id="startSGPA">Calculate</button>
                  <button type="reset" class="btn btn-danger">Reset</button>
              </div>
+             
          </div>
          <br>
-         <div class="col-md-3">
-             <div class="well SGPAresult">Result will appear here</div>
+         <div class="col-md-7">
+         </div>
+         <div class="col-md-5">
+                <div class="well SGPAresult">Result will appear here</div>
          </div>
      </form>
      <br>
@@ -135,12 +155,12 @@
                      <input type="text" class="form-control cgpa" placeholder="semester 8">
                  </div>
                  <br>
+                 <button type="button" class="btn btn-success cgpaCalculate">Calculate CGPA</button>
                  <button type="reset" class="btn btn-danger">Reset</button>
+                 
              </form>
          </div>
      </div>
-     <br>
-     <button type="button" class="btn btn-success cgpaCalculate">Calculate CGPA</button>
      <br>
      <div class="col-md-4">
          <div class="well cgparesult">Result will appear here</div>
@@ -167,6 +187,10 @@
         <div class="modal-body">
             <button class="btn btn-primary btn-block" id="addSubject" data-dismiss="modal">Main subject</button>
             <button class="btn btn-primary btn-block" id="addElective" data-dismiss="modal">Elective</button>
+            <button class="btn btn-primary btn-block" id="addTwoCredit" data-dismiss="modal">2 Credits(Project phase 1, technical seminar, labs)</button>
+            <button class="btn btn-primary btn-block" id="addProjectTwo" data-dismiss="modal">Project phase 2</button>
+            <button class="btn btn-primary btn-block" id="addOneCredit" data-dismiss="modal">1 Credit</button>
+            
             </div>
         </div>
     </div>

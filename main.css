@@ -10,6 +10,14 @@ body {
     text-align: justify;
     font-family: 'Lato',sans-serif;
 }
+.intro {
+    font-size: 20px;
+    text-align: justify;
+    font-family: 'Lato',sans-serif;
+}
+.cgpa {
+    margin: 10px;
+}
 .sgpa-title {
     font-family: 'Chela One',sans-serif;
 }
